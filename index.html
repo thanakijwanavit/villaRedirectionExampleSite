@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- initialize bootstrap -->
+<head>
+  <title>redirection Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<!-- alert for redirection -->
+
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Villa is launching a new site. Would you like to try?
+  <a id="redirectLink" href="">
+    <button
+        class="btn btn-primary"
+      >
+      Try our new website
+    </button>
+  </a>
+</div>
+
+<!-- body for the villa website (mock up) -->
+<iframe src="https://villa.kitchen" height="800" width="100%" title="Iframe Example"></iframe>
+
+
+
+<!-- script for getting redirection path from the database -->
+<script>
+  let currentPath = window.location.href
+  console.log(currentPath)
+  let queryUrl = "https://0o4oigbg0d.execute-api.ap-southeast-1.amazonaws.com/Prod/get?path=" + currentPath
+
+  $.getJSON( queryUrl, function( data ) {
+    console.log('data is ', data.redirectLink)
+    let redirectA = document.getElementById("redirectLink")
+    redirectA.href = data.redirectLink
+
+  });
+</script>
+
+</body>
+</html>
